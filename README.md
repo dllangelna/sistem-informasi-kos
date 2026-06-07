@@ -17,9 +17,31 @@ Sistem ini dirancang untuk mengelola proses operasional kos, mulai dari pendafta
 
 ## 4. Entity Relationship Diagram (ERD)
 Sistem ini terdiri dari tiga entitas utama: **Kamar**, **Penghuni**, dan **Transaksi**.
-* **Kamar:** `id_kamar` (PK), `nomor_kamar`, `fasilitas`, `harga`.
-* **Penghuni:** `id_penghuni` (PK), `nama`, `no_hp`.
-* **Transaksi:** `id_transaksi` (PK), `id_kamar` (FK), `id_penghuni` (FK), `tgl_masuk`.
+erDiagram
+    KAMAR ||--o{ TRANSAKSI : disewa
+    PENGHUNI ||--o{ TRANSAKSI : melakukan
+    
+    KAMAR {
+        int id_kamar PK
+        string nomor_kamar
+        string fasilitas
+        int harga
+    }
+    
+    PENGHUNI {
+        int id_penghuni PK
+        string nama
+        string no_hp
+        string no_ktp
+    }
+    
+    TRANSAKSI {
+        int id_transaksi PK
+        int id_kamar FK
+        int id_penghuni FK
+        date tgl_masuk
+        int total_bayar
+    }
 
 ## 5. Kardinalitas
 * **Penghuni ke Transaksi:** (1:N) - Satu penghuni dapat melakukan transaksi sewa berkali-kali.
