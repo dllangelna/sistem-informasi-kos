@@ -16,7 +16,8 @@ Sistem ini dirancang untuk mengelola proses operasional kos, mulai dari pendafta
 * **Admin/Pemilik Kos:** Mengelola data master kamar dan penghuni, serta mencatat transaksi pembayaran.
 
 ## 4. Entity Relationship Diagram (ERD)
-Sistem ini terdiri dari tiga entitas utama: **Kamar**, **Penghuni**, dan **Transaksi**.
+
+```mermaid
 erDiagram
     KAMAR ||--o{ TRANSAKSI : disewa
     PENGHUNI ||--o{ TRANSAKSI : melakukan
