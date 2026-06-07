@@ -1,21 +1,53 @@
 # Sistem Informasi Pengelolaan Kos
 
-Repository ini berisi laporan jawaban UAS Basis Data mengenai rancangan database, dokumentasi ERD, normalisasi, script SQL DDL & DML, serta aplikasi CRUD (Create, Read, Update, Delete) berbasis Python dan PHP.
+Repository ini berisi laporan jawaban UAS Basis Data mengenai rancangan database, dokumentasi ERD, normalisasi, script SQL DDL & DML, serta aplikasi CRUD berbasis Python dan PHP.
 
-## Struktur Proyek
-- `php/`: Berisi implementasi MVC (Model-View-Controller) untuk manajemen data Kamar dan Penghuni.
-- `python/`: Berisi skrip Python untuk integrasi CRUD database MySQL.
-- `database.sql`: Berisi DDL (Data Definition Language) untuk struktur tabel dan DML (Data Manipulation Language) untuk data dummy.
+## 1. Topik yang Dipilih
+**Topik:** Sistem Informasi Pengelolaan Kos.
+Sistem ini dirancang untuk mengelola proses operasional kos, mulai dari pendaftaran penghuni, pengelolaan ketersediaan kamar, hingga pencatatan transaksi pembayaran sewa.
 
-## Spesifikasi
-- **Database**: MySQL / MariaDB
-- **Backend PHP**: Native MVC (Model-View-Controller)
-- **Backend Python**: mysql-connector-python
+## 2. Proses Bisnis dan Modul
+* **Modul Penghuni:** Mengelola data diri penyewa (nama, nomor HP, KTP).
+* **Modul Kamar:** Mengelola data kamar (nomor kamar, fasilitas, harga, status).
+* **Modul Transaksi:** Mencatat periode sewa dan pembayaran biaya sewa.
 
-## Cara Menjalankan
-1. Import file `database.sql` ke dalam MySQL melalui phpMyAdmin.
-2. Pastikan XAMPP sudah berjalan untuk folder `php/`.
-3. Untuk aplikasi Python, jalankan perintah `pip install -r python/requirements.txt` lalu jalankan skrip `python/crud_kos.py`.
+## 3. Pihak yang Terlibat (Aktor)
+* **Penghuni:** Melakukan pendaftaran data diri dan melakukan pembayaran sewa.
+* **Admin/Pemilik Kos:** Mengelola data master kamar dan penghuni, serta mencatat transaksi pembayaran.
+
+## 4. Entity Relationship Diagram (ERD)
+Sistem ini terdiri dari tiga entitas utama: **Kamar**, **Penghuni**, dan **Transaksi**.
+* **Kamar:** `id_kamar` (PK), `nomor_kamar`, `fasilitas`, `harga`.
+* **Penghuni:** `id_penghuni` (PK), `nama`, `no_hp`.
+* **Transaksi:** `id_transaksi` (PK), `id_kamar` (FK), `id_penghuni` (FK), `tgl_masuk`.
+
+## 5. Kardinalitas
+* **Penghuni ke Transaksi:** (1:N) - Satu penghuni dapat melakukan transaksi sewa berkali-kali.
+* **Kamar ke Transaksi:** (1:N) - Satu kamar dapat disewa dalam berbagai transaksi sewa.
+
+## 6. Normalisasi Database
+Database telah dinormalisasi hingga **3NF** untuk memastikan data bersifat atomik, memiliki ketergantungan fungsional penuh, dan menghapus ketergantungan transitif guna meminimalkan redundansi data.
+
+## 7. Implementasi Database (DDL SQL)
+File `database.sql` berisi perintah untuk membuat tabel:
+* `kamar` (Master)
+* `penghuni` (Master)
+* `transaksi` (Transaksi)
+
+## 8. Manipulasi Data (DML)
+File ini mencakup perintah `INSERT` untuk mengisi data awal, `UPDATE` untuk perubahan data, dan `DELETE` untuk menghapus data.
+
+## 9. Aplikasi CRUD
+Aplikasi ini dikembangkan dengan dua pendekatan:
+* **Python:** Skrip interaktif untuk administrasi database menggunakan `mysql-connector-python`.
+* **PHP (MVC):** Antarmuka web untuk pengelolaan data yang mudah digunakan oleh admin.
+
+---
+
+### Cara Menjalankan
+1. **Database:** Import `database.sql` ke MySQL melalui phpMyAdmin.
+2. **PHP:** Pastikan XAMPP berjalan. Buka folder `php/` di browser atau jalankan `php -S localhost:8080` di terminal.
+3. **Python:** Jalankan `pip install -r python/requirements.txt` lalu jalankan `python python/crud_kos.py`.
 
 ---
 *Dibuat untuk memenuhi tugas UAS Mata Kuliah Basis Data.*
